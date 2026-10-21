@@ -1,0 +1,9 @@
+{
+  "permission": {
+    "edit": {
+      "*": "deny",
+      ".ai-team/**": "allow"
+    },
+    "bash": "allow"
+  }
+}

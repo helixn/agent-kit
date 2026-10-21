@@ -1,0 +1,53 @@
+# =====================================================================
+# agent-kit: ворота качества (Quality Gates & Guardrails)
+# Вставить в pyproject.toml целевого проекта (проверить отсутствие
+# дублирующихся таблиц TOML). Порог fail_under — правило «ТОЛЬКО ВВЕРХ».
+# =====================================================================
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["app", "tests"]
+
+[tool.ruff.lint]
+# E/F — стиль и pyflakes; I — импорты; B — ловушки bugbear; UP — современный синтаксис;
+# ASYNC — блокирующий I/O в async; S — безопасность (секреты, SQL-конкатенация, except-pass);
+# TID — запрещённые импорты (границы слоёв); RUF — правила ruff.
+select = ["E", "F", "I", "B", "UP", "ASYNC", "S", "TID", "RUF"]
+
+[tool.ruff.lint.flake8-tidy-imports.banned-api]
+# Пример запрета границ слоёв: SQLAlchemy не импортируется в транспортном слое.
+# В легитимных каталогах (repositories/models/core) запрет снимается в per-file-ignores ниже.
+"sqlalchemy".msg = "Прямой импорт SQLAlchemy в API-слое запрещён. Используйте сервисный слой."
+
+[tool.ruff.lint.flake8-bugbear]
+# Depends/Query/Path/Body — легитимные вызовы в значениях аргументов по умолчанию (не B008).
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Query", "fastapi.Path", "fastapi.Body"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]                # assert в тестах разрешён
+"app/repositories/**" = ["TID251"]   # здесь ORM законен
+"app/models/**" = ["TID251"]
+"app/core/**" = ["TID251"]
+"alembic/**" = ["TID251"]
+
+[tool.basedpyright]
+pythonVersion = "3.12"
+typeCheckingMode = "strict"
+include = ["app", "tests"]
+reportMissingTypeStubs = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-ra -q --strict-markers --cov"
+
+[tool.coverage.run]
+source = ["app"]
+branch = true
+omit = ["app/__init__.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 0  # точка старта «только вверх»: characterization → 60, integration → 80, фича → 85+
