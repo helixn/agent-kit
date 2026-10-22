@@ -93,6 +93,6 @@ CODE_GATE (ворота 0) → **Reviewer** (свежая read-only сессия
 
 ## Происхождение
 
-Методология: учебный репозиторий воркшопа `Python-AI` (ветки day-1 / day-2). Принцип Zero Hidden Scripts:
+Принцип Zero Hidden Scripts:
 всё, на что ссылаются скилы, лежит в комплекте; внешние инструменты помечены как опциональные.
 Скилы читаются OpenCode / Cursor / Copilot / Codex / Claude Code (для последнего — `CLAUDE.md` с `@AGENTS.md`).
