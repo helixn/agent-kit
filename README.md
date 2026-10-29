@@ -17,7 +17,7 @@
 
 | Путь в проекте | Что появляется |
 |---|---|
-| `.agents/skills/<имя>/SKILL.md` | 9+ процедурных скилов (+ скилы направления) |
+| `.agents/skills/<имя>/SKILL.md` | 15 процедурных скилов (+ скилы направления) |
 | `.agents/AGENTS.md` | Канон правил (шаблон с `{{PLACEHOLDER}}`) |
 | `AGENTS.md`, `CLAUDE.md` | Входы для агентов (копия канона / `@AGENTS.md`) |
 | `ONBOARDING-AGENT.md` | Контракт автономного агента: порядок работы, стоп-условия, BLOCKED |
@@ -52,7 +52,7 @@ bash ~/tools/agent-kit/INSTALL/install.sh . web-fastapi     # или quant-ml; �
 | `ONBOARDING-AGENT.md` | Точка входа любого автономного агента |
 | `INSTALL/` | Установщики: `install.sh` (Git Bash/Linux) и `install.ps1` (Windows PowerShell) |
 | `common/` | Универсальный слой: конституция, ворота качества, карта архитектуры |
-| `skills/` | 9 процедурных скилов в формате открытого стандарта Agent Skills |
+| `skills/` | 15 процедурных скилов в формате открытого стандарта Agent Skills |
 | `orchestration/` | Ролевой конвейер: промпты ролей, шаблоны, рубрика, изоляция, валидатор handoff |
 | `directions/` | Пакеты направлений: `web-fastapi`, `quant-ml` + как собрать своё |
 
